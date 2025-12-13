@@ -44,7 +44,7 @@ Sou estudante de **Engenharia de Software na PUCRS** e Desenvolvedor Back-end ap
 
 ## 🏆 Projetos em Destaque
 
-Aqui estão alguns dos projetos acadêmicos e práticos onde atuei como **Líder Técnico** e **Arquiteto de Software**:
+Aqui estão alguns dos projetos acadêmicos e práticos onde atuei eu trabalhei:
 
 ### 🎨 [Lucky Draw](https://github.com/VitorJacom/lucky-draw)
 *Aplicativo mobile gamificado para desbloqueio criativo utilizando cartas de tarô.*
