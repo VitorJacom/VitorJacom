@@ -11,7 +11,7 @@ Sou **Engenheiro de Software** focado em desenvolvimento Back-end com Java e Spr
 * 💼 **Experiência:** Atuei como **Software Engineer Intern** na *Tecnova Energia*, trabalhando com sustentação de sistemas críticos.
 * 🎓 **Acadêmico:** Monitor de Programação Orientada a Objetos (Java) e Instrutor de Workshops de Docker na PUCRS.
 * 🏆 **Certificações:** **GitHub Foundations (GH-900)** — Validando expertise em colaboração, workflows e automação com GitHub Actions.
-* 🌱 **Foco Atual:** Arquitetura de Microsserviços, Segurança (DevSecOps) e migração **Java -> Kotlin**.
+* 🌱 **Foco Atual:** Arquitetura de Microsserviços, Segurança (DevSecOps) e Kotlin.
 
 ---
 
