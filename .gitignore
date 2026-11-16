@@ -2,6 +2,9 @@
 task.md
 implementation_plan.md
 walkthrough.md
+planning_proposal.md
+.mockup-preview.html
+.mockup-preview.png
 
 # Dependencies & Build Artefacts
 node_modules/

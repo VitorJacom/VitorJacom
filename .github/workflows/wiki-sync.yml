@@ -1,0 +1,63 @@
+name: Sync Docs to GitHub Wiki
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - '.github/workflows/wiki-sync.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: wiki-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  sync-wiki:
+    name: Synchronize Living Docs & Mockups to Wiki
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Synchronize docs/ to GitHub Wiki (Gollum Dual-Context)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          WIKI_URL="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.wiki.git"
+
+          if ! git clone "$WIKI_URL" wiki-temp; then
+            echo "::error::Failed to clone GitHub Wiki repository (${GITHUB_REPOSITORY}.wiki.git). Ensure the Wiki tab is enabled and initialized in the repository settings."
+            exit 1
+          fi
+
+          rsync -av --delete --exclude='.git' docs/ wiki-temp/
+
+          cp docs/mockups/README.md wiki-temp/Mockups-Catalog.md
+          cp docs/screenshots/README.md wiki-temp/Implemented-Screens-Catalog.md
+
+          sed -i 's|\.\./assets/mockups/|assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
+          sed -i 's|\.\./screenshots/|screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
+          sed -i 's|(\.\./mockups/README\.md)|(Mockups-Catalog)|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
+          sed -i -E 's|\(([^)[:space:]/]+)\.md\)|(\1)|g' wiki-temp/Mockups-Catalog.md wiki-temp/Implemented-Screens-Catalog.md wiki-temp/mockups/README.md wiki-temp/screenshots/README.md
+
+          cd wiki-temp
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No documentation changes to synchronize with GitHub Wiki."
+          else
+            git commit -m "docs(wiki): sync living specs and architecture from main (${GITHUB_SHA::7})"
+            if ! git push origin HEAD; then
+              echo "::error::Failed to push updated documentation to GitHub Wiki (${GITHUB_REPOSITORY}.wiki.git)."
+              exit 1
+            fi
+          fi
