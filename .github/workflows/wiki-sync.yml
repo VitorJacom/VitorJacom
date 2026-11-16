@@ -35,9 +35,12 @@ jobs:
           rsync -av --delete --exclude='.git' docs/ wiki-temp/
 
           cp docs/mockups/README.md wiki-temp/Mockups-Catalog.md
+          cp docs/screenshots/README.md wiki-temp/Implemented-Screens-Catalog.md
 
           sed -i 's|../assets/mockups/|assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
+          sed -i 's|../screenshots/|screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
           sed -i 's|doassets/mockups/|docs/assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
+          sed -i 's|doscreenshots/|docs/screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
 
           cd wiki-temp
           git config user.name "github-actions[bot]"

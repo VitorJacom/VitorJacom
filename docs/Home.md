@@ -41,3 +41,7 @@ Todo o ciclo de engenharia, arquitetura e governança deste repositório é regi
 - [Índice Geral do Catálogo de Telas (`Mockups-Catalog`)](Mockups-Catalog)
 - [Template Canônico de Living Spec (`TEMPLATE`)](TEMPLATE)
 - [Living Spec: GitHub Profile README (`github-profile-readme`)](github-profile-readme)
+
+### 🖥️ Telas Implementadas (Produção)
+- [Catálogo de Telas Implementadas em Produção (`Implemented-Screens-Catalog`)](Implemented-Screens-Catalog)
+- [Portfólio Web — Fundação, Hero & Seções Canônicas (`site-foundation`)](site-foundation)

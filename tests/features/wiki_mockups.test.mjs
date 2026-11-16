@@ -23,6 +23,24 @@ const PROFILE_MOCKUP_PNG_PATH = path.join(
   'mockups',
   'github-profile-readme.png'
 );
+const SCREENSHOTS_README_PATH = path.join(
+  REPO_ROOT,
+  'docs',
+  'screenshots',
+  'README.md'
+);
+const SITE_FOUNDATION_MD_PATH = path.join(
+  REPO_ROOT,
+  'docs',
+  'screenshots',
+  'site-foundation.md'
+);
+const SITE_FOUNDATION_PNG_PATH = path.join(
+  REPO_ROOT,
+  'docs',
+  'screenshots',
+  'site-foundation-preview.png'
+);
 const WIKI_SYNC_WORKFLOW_PATH = path.join(
   REPO_ROOT,
   '.github',
@@ -34,7 +52,7 @@ const EPHEMERAL_PREVIEW_HTML_PATH = path.join(REPO_ROOT, '.mockup-preview.html')
 
 describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite', () => {
   describe('Happy Path', () => {
-    it('should provide docs/Home.md with executive overview, 4 AIDD values, portfolio stack, AGES showcase, blog, MCP server, and mockups catalog links', () => {
+    it('should provide docs/Home.md with executive overview, 4 AIDD values, portfolio stack, AGES showcase, blog, MCP server, mockups catalog, and implemented screens catalog links', () => {
       assert.ok(
         fs.existsSync(HOME_MD_PATH),
         `Expected docs/Home.md to exist at ${HOME_MD_PATH}`
@@ -52,7 +70,9 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
         'AGES',
         'MCP',
         'Mockups-Catalog',
-        'github-profile-readme'
+        'github-profile-readme',
+        'Implemented-Screens-Catalog',
+        'site-foundation'
       ];
 
       for (const term of requiredTerms) {
@@ -63,7 +83,7 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       }
     });
 
-    it('should provide docs/_Sidebar.md with navigation links to Home, ARCHITECTURE, ADRs 0001-0003, Mockups-Catalog, and github-profile-readme', () => {
+    it('should provide docs/_Sidebar.md with navigation links to Home, ARCHITECTURE, ADRs 0001-0003, Mockups-Catalog, github-profile-readme, Implemented-Screens-Catalog, and site-foundation', () => {
       assert.ok(
         fs.existsSync(SIDEBAR_MD_PATH),
         `Expected docs/_Sidebar.md to exist at ${SIDEBAR_MD_PATH}`
@@ -77,13 +97,16 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
         '0002-content-driven-blog-e-mcp-stdio-sem-backend',
         '0003-showcase-interativo-ages-demos-client-side',
         'Mockups-Catalog',
-        'github-profile-readme'
+        'github-profile-readme',
+        '🖥️ Telas Implementadas',
+        'Implemented-Screens-Catalog',
+        'site-foundation'
       ];
 
       for (const target of requiredLinks) {
         assert.ok(
           content.includes(target),
-          `docs/_Sidebar.md must include link target: "${target}"`
+          `docs/_Sidebar.md must include link/section target: "${target}"`
         );
       }
     });
@@ -182,6 +205,64 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       );
     });
 
+    it('should provide docs/screenshots/README.md (Implemented Screens Catalog) listing site-foundation.md and referencing production visual proof', () => {
+      assert.ok(
+        fs.existsSync(SCREENSHOTS_README_PATH),
+        `Expected docs/screenshots/README.md to exist at ${SCREENSHOTS_README_PATH}`
+      );
+      const content = fs.readFileSync(SCREENSHOTS_README_PATH, 'utf-8');
+
+      assert.ok(
+        content.includes('site-foundation.md'),
+        'docs/screenshots/README.md must list site-foundation.md'
+      );
+      assert.ok(
+        content.includes('site-foundation'),
+        'docs/screenshots/README.md must reference site-foundation slug'
+      );
+    });
+
+    it('should provide docs/screenshots/site-foundation.md documenting the implemented Web Portfolio screen and validate PNG signature of docs/screenshots/site-foundation-preview.png', () => {
+      assert.ok(
+        fs.existsSync(SITE_FOUNDATION_MD_PATH),
+        `Expected docs/screenshots/site-foundation.md to exist at ${SITE_FOUNDATION_MD_PATH}`
+      );
+      const mdContent = fs.readFileSync(SITE_FOUNDATION_MD_PATH, 'utf-8');
+
+      const requiredItems = [
+        'React 19',
+        'Tailwind CSS',
+        '## 📋 Metadados',
+        '## 🖼️ Captura da Implementação Renderizada',
+        '../screenshots/site-foundation-preview.png'
+      ];
+
+      for (const item of requiredItems) {
+        assert.ok(
+          mdContent.includes(item),
+          `docs/screenshots/site-foundation.md must include "${item}"`
+        );
+      }
+
+      assert.ok(
+        fs.existsSync(SITE_FOUNDATION_PNG_PATH),
+        `Expected production PNG screenshot at ${SITE_FOUNDATION_PNG_PATH}`
+      );
+      const pngBuffer = fs.readFileSync(SITE_FOUNDATION_PNG_PATH);
+      assert.ok(
+        pngBuffer.length > 1024,
+        'site-foundation-preview.png must be a non-empty image (> 1KB)'
+      );
+      const expectedSignature = Buffer.from([
+        0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
+      ]);
+      assert.deepStrictEqual(
+        pngBuffer.subarray(0, 8),
+        expectedSignature,
+        'site-foundation-preview.png must start with a valid 8-byte PNG signature'
+      );
+    });
+
     it('should configure .github/workflows/wiki-sync.yml with push triggers on main (docs/** and workflow path), workflow_dispatch, and contents: write permission', () => {
       assert.ok(
         fs.existsSync(WIKI_SYNC_WORKFLOW_PATH),
@@ -243,7 +324,7 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       );
     });
 
-    it('should perform Dual-Context normalization for Gollum engine (generating Mockups-Catalog.md and rewriting ../assets/mockups/ to assets/mockups/)', () => {
+    it('should perform Dual-Context normalization for Gollum engine (generating Mockups-Catalog.md & Implemented-Screens-Catalog.md and rewriting ../assets/mockups/ and ../screenshots/)', () => {
       assert.ok(
         fs.existsSync(WIKI_SYNC_WORKFLOW_PATH),
         `Cannot validate Dual-Context normalization: ${WIKI_SYNC_WORKFLOW_PATH} does not exist`
@@ -254,10 +335,19 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
         workflow.includes('Mockups-Catalog.md'),
         'Workflow must generate Mockups-Catalog.md from docs/mockups/README.md for Gollum compatibility'
       );
+      assert.ok(
+        workflow.includes('Implemented-Screens-Catalog.md'),
+        'Workflow must generate Implemented-Screens-Catalog.md from docs/screenshots/README.md for Gollum compatibility'
+      );
       assert.match(
         workflow,
         /sed\s+-i\s+['"]s\|\.\.\/assets\/mockups\/\|assets\/mockups\/\|g['"]/,
         'Workflow must rewrite relative image paths "../assets/mockups/" to "assets/mockups/" for flat Gollum root rendering'
+      );
+      assert.match(
+        workflow,
+        /sed\s+-i\s+['"]s\|\.\.\/screenshots\/\|screenshots\/\|g['"]/,
+        'Workflow must rewrite relative image paths "../screenshots/" to "screenshots/" for flat Gollum root rendering'
       );
     });
 
@@ -287,14 +377,16 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       );
     });
 
-    it('should not contain empty markdown links [text]() across any Wiki or Mockup markdown files', () => {
+    it('should not contain empty markdown links [text]() across any Wiki, Mockup, or Implemented Screen markdown files', () => {
       const markdownFiles = [
         HOME_MD_PATH,
         SIDEBAR_MD_PATH,
         FOOTER_MD_PATH,
         MOCKUPS_README_PATH,
         MOCKUPS_TEMPLATE_PATH,
-        PROFILE_MOCKUP_MD_PATH
+        PROFILE_MOCKUP_MD_PATH,
+        SCREENSHOTS_README_PATH,
+        SITE_FOUNDATION_MD_PATH
       ];
 
       const emptyLinkRegex = /\[[^\]]*\]\(\s*\)/g;

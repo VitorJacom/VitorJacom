@@ -18,3 +18,10 @@
 - [📑 Índice de Mockups (Mockups-Catalog)](Mockups-Catalog)
 - [🧩 Template de Living Spec](TEMPLATE)
 - [🖼️ GitHub Profile README](github-profile-readme)
+
+---
+
+### 🖥️ Telas Implementadas
+
+- [📑 Índice de Telas Implementadas (Implemented-Screens-Catalog)](Implemented-Screens-Catalog)
+- [🌐 Portfólio Web — Fundação (site-foundation)](site-foundation)
