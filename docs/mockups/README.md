@@ -1,0 +1,34 @@
+# 🎨 Catálogo de Telas (Mockup Living Specs)
+
+Bem-vindo ao catálogo central de especificações vivas de telas (**Living Specs**) do projeto `VitorJacom`.
+
+Este catálogo centraliza o design de interfaces segundo o protocolo determinístico **Figma-less Mockup-as-Code**, garantindo que todas as telas, componentes e fluxos visuais sejam especificados, versionados e auditados diretamente no Git antes e depois da codificação.
+
+---
+
+## 📑 Índice de Especificações Vivas
+
+A tabela abaixo lista as telas e interfaces cadastradas no sistema, seu identificador (`slug`), viewport de referência e status de aprovação visual:
+
+| Slug | Nome da Tela / Interface | Viewport | Status | Origem | Spec |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `TEMPLATE` | Template Canônico de Living Spec (3 Camadas) | 1280x800 / 390x844 | `Canonical` | Governança Mockup-as-Code (Issue #25) | [TEMPLATE.md](TEMPLATE.md) |
+| `github-profile-readme` | GitHub Profile README Executivo & Identidade Visual | 1280x2800 / 960px | `Approved` | Refinamento Visual / Avatar & Header Fix | [github-profile-readme.md](github-profile-readme.md) |
+
+---
+
+## 🚀 Como Criar e Versionar um Novo Mockup (Workflow)
+
+Quando uma funcionalidade demandar alterações visuais ou novas interfaces, o subagente `uiux-designer` deve seguir o fluxo:
+
+1. **Estruturar a Living Spec**:
+   Crie o documento da tela em `docs/mockups/<slug>.md` contendo Spatial Blueprint ASCII (Camada 1), Design Tokens & Luminance Contract (Camada 2) e Estados Interativos.
+
+2. **Gerar o Protótipo e Captura Headless**:
+   Crie o arquivo estático autocontido `.mockup-preview.html` e gere o screenshot determinístico headless via Chromium:
+   ```bash
+   chromium --headless --no-sandbox --screenshot=docs/assets/mockups/<slug>.png --window-size=1280,1024 .mockup-preview.html
+   ```
+
+3. **Registrar no Catálogo**:
+   Adicione uma nova linha na tabela do índice acima.
