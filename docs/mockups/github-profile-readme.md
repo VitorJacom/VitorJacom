@@ -10,7 +10,7 @@ Especificação viva da interface do perfil público executivo do GitHub (`Vitor
 | :--- | :--- | :--- |
 | **Slug** | `github-profile-readme` | Identificador único de interface e spec |
 | **Status** | `Approved` | Aprovado no Design Gate preliminar (Modo 1) |
-| **Origem** | Demanda de Refinamento Visual / Avatar & Header Fix | Issue de Refatoração Estética e Identidade Visual |
+| **Origem** | Demanda de Refinamento Visual / Avatar & Header Fix (Target Spec — Issue #23) | Issue de Refatoração Estética e Identidade Visual |
 | **Viewport** | `1280x2800` (Full-Page Canvas) / `960px` max-width | Dimensão de renderização e captura determinística headless |
 | **Última Atualização** | 2026-11-12 | Revisão completa de contraste, aspect ratio e tipografia |
 
@@ -141,7 +141,7 @@ Wireframe estrutural delimitando zonas espaciais, proporções relativas, alinha
 
 ---
 
-## 🛠️ Especificação Canônica dos Assets de Identidade Visual
+## 🛠️ Especificação Canônica dos Assets de Identidade Visual (Target Spec — Issue #23)
 
 ### 1. Avatar Executivo Circular (`site/public/avatar.png` e `avatar.webp`)
 - **Problema Anterior Resolvido**:

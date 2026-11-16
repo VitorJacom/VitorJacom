@@ -2,7 +2,7 @@
 
 Bem-vindo ao catálogo oficial de **Telas Implementadas em Produção** do ecossistema `VitorJacom/VitorJacom`.
 
-Enquanto o [Catálogo de Mockups (`Mockups-Catalog`)](Mockups-Catalog) registra as especificações visuais preliminares (**Modo 1: Design Gate / Living Specs**), este catálogo consolida as **Provas Visuais Determinísticas Pós-Implementação (Modo 2: Visual Audit & Gatekeeper)**. Cada registro aqui comprova como a interface real codificada em produção é renderizada por um navegador headless (`chromium --headless`) e auditada antes do merge na branch `main`.
+Enquanto o [Catálogo de Mockups (`Mockups-Catalog`)](../mockups/README.md) registra as especificações visuais preliminares (**Modo 1: Design Gate / Living Specs**), este catálogo consolida as **Provas Visuais Determinísticas Pós-Implementação (Modo 2: Visual Audit & Gatekeeper)**. Cada registro aqui comprova como a interface real codificada em produção é renderizada por um navegador headless (`chromium --headless`) e auditada antes do merge na branch `main`.
 
 ---
 

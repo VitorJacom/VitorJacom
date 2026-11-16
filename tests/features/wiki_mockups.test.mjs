@@ -341,13 +341,27 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       );
       assert.match(
         workflow,
-        /sed\s+-i\s+['"]s\|\.\.\/assets\/mockups\/\|assets\/mockups\/\|g['"]/,
-        'Workflow must rewrite relative image paths "../assets/mockups/" to "assets/mockups/" for flat Gollum root rendering'
+        /sed\s+-i\s+['"]s\|\\\.\\\.\/assets\/mockups\/\|assets\/mockups\/\|g['"]/,
+        'Workflow must rewrite relative image paths "../assets/mockups/" with properly escaped dots "\\.\\." to "assets/mockups/"'
       );
       assert.match(
         workflow,
-        /sed\s+-i\s+['"]s\|\.\.\/screenshots\/\|screenshots\/\|g['"]/,
-        'Workflow must rewrite relative image paths "../screenshots/" to "screenshots/" for flat Gollum root rendering'
+        /sed\s+-i\s+['"]s\|\\\.\\\.\/screenshots\/\|screenshots\/\|g['"]/,
+        'Workflow must rewrite relative image paths "../screenshots/" with properly escaped dots "\\.\\." to "screenshots/"'
+      );
+      assert.ok(
+        !workflow.includes('doassets') && !workflow.includes('doscreenshots'),
+        'Workflow must not contain unescaped regex corruption workarounds (doassets/doscreenshots)'
+      );
+      assert.match(
+        workflow,
+        /concurrency:/,
+        'Workflow must configure concurrency control to prevent wiki push race conditions'
+      );
+      assert.match(
+        workflow,
+        /timeout-minutes:\s*\d+/,
+        'Workflow must declare timeout-minutes on sync-wiki job'
       );
     });
 

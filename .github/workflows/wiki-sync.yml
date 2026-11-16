@@ -11,10 +11,15 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: wiki-sync-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   sync-wiki:
     name: Synchronize Living Docs & Mockups to Wiki
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -37,10 +42,10 @@ jobs:
           cp docs/mockups/README.md wiki-temp/Mockups-Catalog.md
           cp docs/screenshots/README.md wiki-temp/Implemented-Screens-Catalog.md
 
-          sed -i 's|../assets/mockups/|assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
-          sed -i 's|../screenshots/|screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
-          sed -i 's|doassets/mockups/|docs/assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
-          sed -i 's|doscreenshots/|docs/screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
+          sed -i 's|\.\./assets/mockups/|assets/mockups/|g' wiki-temp/mockups/*.md wiki-temp/Mockups-Catalog.md
+          sed -i 's|\.\./screenshots/|screenshots/|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
+          sed -i 's|(\.\./mockups/README\.md)|(Mockups-Catalog)|g' wiki-temp/screenshots/*.md wiki-temp/Implemented-Screens-Catalog.md
+          sed -i -E 's|\(([^)[:space:]/]+)\.md\)|(\1)|g' wiki-temp/Mockups-Catalog.md wiki-temp/Implemented-Screens-Catalog.md wiki-temp/mockups/README.md wiki-temp/screenshots/README.md
 
           cd wiki-temp
           git config user.name "github-actions[bot]"
