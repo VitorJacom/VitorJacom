@@ -1,5 +1,9 @@
 <div align="center">
-  <img src="site/public/vitor.webp" width="120" height="120" style="border-radius: 50%; object-fit: cover;" alt="Vítor Jacom" />
+  <img src="site/public/banner.webp" width="100%" alt="Vítor Jacom — Engenharia de Software Full-Stack e Arquitetura Cloud" />
+
+  <br /><br />
+
+  <img src="site/public/avatar.png" width="140" height="140" alt="Vítor Jacom de Souza" />
 
   # Vítor Jacom de Souza
 
@@ -8,7 +12,8 @@
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/vitorjacom)
   [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/VitorJacom)
   [![Email](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:vjds.vitor@gmail.com)
-  [![Live SaaS](https://img.shields.io/badge/Live_SaaS-chorarival.com.br-00C7B7?style=for-the-badge&logo=google-cloud&logoColor=white)](https://chorarival.com.br)
+  [![Live SaaS](https://img.shields.io/badge/Live_SaaS-chorarival.com.br-0D9488?style=for-the-badge&logo=google-cloud&logoColor=white)](https://chorarival.com.br)
+  [![Portfólio Web](https://img.shields.io/badge/Portfólio_Web-VitorJacom-4F46E5?style=for-the-badge&logo=react&logoColor=white)](https://vitorjacom.github.io/VitorJacom/)
 
 </div>
 
@@ -20,9 +25,11 @@ Engenheiro de Software com foco em sistemas distribuídos de alta resiliência, 
 
 ### 📈 Destaques e Métricas de Impacto
 
-* **Estudify (AGES / PUCRS):** Liderança técnica de **18 devs** organizados em **4 squads** ágeis. Conduzi a arquitetura de cache e renderização que resultou em uma redução de **-98%** no consumo de memória gráfica em dispositivos móveis, além de estabelecer a suíte determinística de testes E2E com Maestro e fluxos de CI/CD automatizados.
-* **Tecnova Energia:** Projetou e implementou automações serverless no **GCP Cloud Run**, eliminando a migração manual de **+25k registros** para dashboards de inteligência no Power BI com **custo zero** de infraestrutura ociosa (*scale-to-zero*).
-* **Pesquisa & Academia (PUCRS):** Monitor acadêmico de Programação Orientada a Objetos com Java e instrutor de workshops técnicos de Docker e conteinerização.
+> **Estudify (AGES / PUCRS):** Liderança técnica de **18 devs** organizados em **4 squads** ágeis. Conduzi a arquitetura de cache e renderização que resultou em uma redução de **-98%** no consumo de memória gráfica em dispositivos móveis, além de estabelecer a suíte determinística de testes E2E com Maestro e fluxos de CI/CD automatizados.
+
+> **Tecnova Energia:** Projetou e implementou automações serverless no **GCP Cloud Run**, eliminando a migração manual de **+25k registros** para dashboards de inteligência no Power BI com **custo zero** de infraestrutura ociosa (*scale-to-zero*).
+
+> **Pesquisa & Academia (PUCRS):** Monitor acadêmico de Programação Orientada a Objetos com Java e instrutor de workshops técnicos de Docker e conteinerização.
 
 ---
 
@@ -71,26 +78,48 @@ Engenheiro de Software com foco em sistemas distribuídos de alta resiliência, 
 
 ## 🚀 Projetos em Destaque (Flagship)
 
-### 1. [Chora Rival](https://chorarival.com.br)
-*Plataforma SaaS Multi-Tenant de geração multimodal em ambiente produtivo real.*
-* **Arquitetura & Stack:** Backend reativo em Java 21 com Virtual Threads e Spring Boot 3.3, frontend em React 19 com Tailwind CSS, conteinerizado no GCP Cloud Run (*scale-to-zero*).
-* **Diferenciais:** Checkout transparente com pagamentos PIX instantâneos via webhook seguro com validação HMAC SHA-256 no Mercado Pago, garantia de idempotência e processamento concorrente de requisições.
-* **Acesse online:** [chorarival.com.br](https://chorarival.com.br)
-
-### 2. [my-agents](https://github.com/VitorJacom/my-agents)
-*Framework de orquestração determinística e governança para agentes autônomos de desenvolvimento (Manifesto AIDD).*
-* **Orquestração Multiagente:** Pipeline determinístico operando por máquina de estados com papéis especializados (Planner, QA Engineer, Coder, Gatekeeper).
-* **Governança & Anti-Fraude:** Proteção ativa com *Test Tamper Guard* (zero adulteração de suítes de testes), contratos rígidos via ciclo de vida efêmero (task.md/implementation_plan.md) e auditoria contínua de conformidade arquitetural.
-
-### 3. [MeditAmamente](https://github.com/VitorJacom/meditamamente)
-*Plataforma de pesquisa clínica e acolhimento materno desenvolvida na PUCRS (Destaque Acadêmico 2024).*
-* **Arquitetura:** Back-end robusto em Java e Spring Boot estruturado em 4 camadas sob os princípios de Domain-Driven Design (DDD).
-* **Persistência & Segurança:** Modelagem relacional em PostgreSQL gerenciada com Spring Data JPA, autenticação segura com JWT e documentação OpenAPI.
-
-### 4. [Lucky Draw](https://github.com/VitorJacom/lucky-draw)
-*Aplicação móvel gamificada para desbloqueio criativo de artistas através de cartas de tarô.*
-* **Liderança de Backend & Arquitetura Serverless:** Liderança técnica do backend e cloud na AGES, projetando API cloud-native em Java 17 e Spring Boot 3.4 sobre AWS Lambda, Amazon S3 e banco relacional PostgreSQL.
-* **Segurança & DevOps:** Autenticação stateless com Spring Security e tokens JWT, pipelines de entrega contínua (GitLab CI/CD) orquestrados com Docker e testes automatizados com JUnit 5 e Mockito.
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <h4>1. <a href="https://chorarival.com.br">Chora Rival</a> <sub><code>Production SaaS</code></sub></h4>
+      <p><i>Plataforma SaaS Multi-Tenant de geração multimodal em ambiente produtivo real.</i></p>
+      <ul>
+        <li>Backend reativo em Java 21 (Virtual Threads) e Spring Boot 3.3, frontend em React 19 + Tailwind CSS no GCP Cloud Run (<i>scale-to-zero</i>).</li>
+        <li>Checkout transparente com pagamentos PIX instantâneos via webhook seguro HMAC SHA-256 no Mercado Pago e garantia de idempotência.</li>
+      </ul>
+      <p>🔗 <a href="https://chorarival.com.br">chorarival.com.br →</a></p>
+    </td>
+    <td width="50%" valign="top">
+      <h4>2. <a href="https://github.com/VitorJacom/my-agents">my-agents</a> <sub><code>AIDD Framework</code></sub></h4>
+      <p><i>Framework de orquestração determinística e governança para agentes autônomos de desenvolvimento (Manifesto AIDD).</i></p>
+      <ul>
+        <li>Pipeline determinístico operando por máquina de estados com papéis especializados (Planner, QA, Coder, Gatekeeper).</li>
+        <li>Proteção ativa com <i>Test Tamper Guard</i>, ciclo de vida efêmero (<code>task.md</code> / <code>implementation_plan.md</code>) e auditoria de conformidade.</li>
+      </ul>
+      <p>🔗 <a href="https://github.com/VitorJacom/my-agents">github.com/VitorJacom/my-agents →</a></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <h4>3. <a href="https://github.com/VitorJacom/meditamamente">MeditAmamente</a> <sub><code>Clinical Research</code></sub></h4>
+      <p><i>Plataforma de pesquisa clínica e acolhimento materno desenvolvida na PUCRS (Destaque Acadêmico 2024).</i></p>
+      <ul>
+        <li>Back-end robusto em Java e Spring Boot estruturado em 4 camadas sob os princípios de Domain-Driven Design (DDD).</li>
+        <li>Modelagem relacional em PostgreSQL com Spring Data JPA, autenticação segura com JWT e documentação OpenAPI.</li>
+      </ul>
+      <p>🔗 <a href="https://github.com/VitorJacom/meditamamente">github.com/VitorJacom/meditamamente →</a></p>
+    </td>
+    <td width="50%" valign="top">
+      <h4>4. <a href="https://github.com/VitorJacom/lucky-draw">Lucky Draw</a> <sub><code>Mobile Game</code></sub></h4>
+      <p><i>Aplicação móvel gamificada para desbloqueio criativo de artistas através de cartas de tarô.</i></p>
+      <ul>
+        <li>Liderança técnica do backend e cloud na AGES: API cloud-native em Java 17 e Spring Boot 3.4 sobre AWS Lambda, Amazon S3 e PostgreSQL.</li>
+        <li>Autenticação stateless com Spring Security e JWT, pipelines GitLab CI/CD com Docker e testes automatizados com JUnit 5 e Mockito.</li>
+      </ul>
+      <p>🔗 <a href="https://github.com/VitorJacom/lucky-draw">github.com/VitorJacom/lucky-draw →</a></p>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -104,4 +133,5 @@ Engenheiro de Software com foco em sistemas distribuídos de alta resiliência, 
 
 <div align="center">
   <p>Conecte-se comigo no <a href="https://linkedin.com/in/vitorjacom">LinkedIn</a> ou explore meus repositórios no <a href="https://github.com/VitorJacom">GitHub</a>.</p>
+  <p><sub>Arquitetura &amp; Design sob Governança Determinística AIDD</sub></p>
 </div>
