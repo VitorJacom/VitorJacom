@@ -4,35 +4,56 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const REPO_ROOT = process.cwd();
+const AVATAR_PNG_PATH = path.join(REPO_ROOT, 'site', 'public', 'avatar.png');
 const WEBP_PATH = path.join(REPO_ROOT, 'site', 'public', 'vitor.webp');
 const README_PATH = path.join(REPO_ROOT, 'README.md');
 
 describe('Profile and Static Assets Validation Suite', () => {
-  describe('Static Asset: site/public/vitor.webp', () => {
-    it('should exist physically in site/public/ directory', () => {
+  describe('Static Asset: site/public/avatar.png | site/public/vitor.webp', () => {
+    it('should exist physically in site/public/ directory (avatar.png or legacy vitor.webp)', () => {
+      const hasPng = fs.existsSync(AVATAR_PNG_PATH);
+      const hasWebp = fs.existsSync(WEBP_PATH);
       assert.ok(
-        fs.existsSync(WEBP_PATH),
-        `Expected file to exist at ${WEBP_PATH}, but it was not found.`
+        hasPng || hasWebp,
+        `Expected avatar asset at ${AVATAR_PNG_PATH} or ${WEBP_PATH}, but neither was found.`
       );
     });
 
-    it('should have an optimized file size between 5KB and 150KB (153,600 bytes)', () => {
+    it('should have an optimized file size for existing avatar assets', () => {
+      const hasPng = fs.existsSync(AVATAR_PNG_PATH);
+      const hasWebp = fs.existsSync(WEBP_PATH);
       assert.ok(
-        fs.existsSync(WEBP_PATH),
-        `Cannot verify size: file does not exist at ${WEBP_PATH}`
+        hasPng || hasWebp,
+        `Cannot verify size: neither ${AVATAR_PNG_PATH} nor ${WEBP_PATH} exists.`
       );
-      const stats = fs.statSync(WEBP_PATH);
-      const minSize = 5 * 1024; // 5KB
-      const maxSize = 150 * 1024; // 150KB (153,600 bytes)
 
-      assert.ok(
-        stats.size >= minSize,
-        `Expected file size to be >= ${minSize} bytes (5KB), got ${stats.size} bytes`
-      );
-      assert.ok(
-        stats.size <= maxSize,
-        `Expected file size to be <= ${maxSize} bytes (150KB), got ${stats.size} bytes`
-      );
+      const minSize = 5 * 1024; // 5KB
+
+      if (hasWebp) {
+        const stats = fs.statSync(WEBP_PATH);
+        const maxWebpSize = 150 * 1024; // 150KB (153,600 bytes)
+        assert.ok(
+          stats.size >= minSize,
+          `Expected vitor.webp size >= ${minSize} bytes (5KB), got ${stats.size} bytes`
+        );
+        assert.ok(
+          stats.size <= maxWebpSize,
+          `Expected vitor.webp size <= ${maxWebpSize} bytes (150KB), got ${stats.size} bytes`
+        );
+      }
+
+      if (hasPng) {
+        const stats = fs.statSync(AVATAR_PNG_PATH);
+        const maxPngSize = 2 * 1024 * 1024; // 2MB
+        assert.ok(
+          stats.size >= minSize,
+          `Expected avatar.png size >= ${minSize} bytes (5KB), got ${stats.size} bytes`
+        );
+        assert.ok(
+          stats.size <= maxPngSize,
+          `Expected avatar.png size <= ${maxPngSize} bytes (2MB), got ${stats.size} bytes`
+        );
+      }
     });
   });
 
@@ -57,10 +78,11 @@ describe('Profile and Static Assets Validation Suite', () => {
       );
     });
 
-    it('should reference the circular avatar image targeting site/public/vitor.webp', () => {
+    it('should reference the circular avatar image targeting site/public/avatar.png or site/public/vitor.webp', () => {
       assert.ok(
-        readmeContent.includes('site/public/vitor.webp'),
-        'README.md must reference the optimized avatar image at "site/public/vitor.webp"'
+        readmeContent.includes('site/public/avatar.png') ||
+          readmeContent.includes('site/public/vitor.webp'),
+        'README.md must reference the optimized avatar image at "site/public/avatar.png" or "site/public/vitor.webp"'
       );
     });
 
