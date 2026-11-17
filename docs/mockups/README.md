@@ -14,6 +14,9 @@ A tabela abaixo lista as telas e interfaces cadastradas no sistema, seu identifi
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `TEMPLATE` | Template Canônico de Living Spec (3 Camadas) | 1280x800 / 390x844 | `Canonical` | Governança Mockup-as-Code (Issue #25) | [TEMPLATE.md](TEMPLATE.md) |
 | `github-profile-readme` | GitHub Profile README Executivo & Identidade Visual | 1280x2800 / 960px | `Implemented` | Refinamento Visual / Avatar & Header Fix (Issue #23) | [github-profile-readme.md](github-profile-readme.md) |
+| `portfolio-landing-page` | Portfólio Web & Landing Page Executiva | 1280x1780 / 390x844 | `Proposed` | Issues #4, #5, #6 | [portfolio-landing-page.md](portfolio-landing-page.md) |
+| `ages-showcase-and-demos` | Vitrine AGES & 4 Simuladores Interativos | 1280x1220 / 390x844 | `Proposed` | Épico #7 e Issues #8, #9, #10, #11, #12 | [ages-showcase-and-demos.md](ages-showcase-and-demos.md) |
+| `blog-reader-experience` | Experiência Editorial do Blog (`BlogList` & `BlogPostView`) | 1280x920 / 390x844 | `Proposed` | Issue #14 | [blog-reader-experience.md](blog-reader-experience.md) |
 
 ---
 

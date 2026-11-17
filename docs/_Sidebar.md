@@ -18,6 +18,9 @@
 - [📑 Índice de Mockups (Mockups-Catalog)](Mockups-Catalog)
 - [🧩 Template de Living Spec](TEMPLATE)
 - [🖼️ GitHub Profile README](github-profile-readme)
+- [🏠 Landing Page do Portfólio (portfolio-landing-page)](portfolio-landing-page)
+- [🚀 Showcase AGES & Demos (ages-showcase-and-demos)](ages-showcase-and-demos)
+- [✍️ Experiência do Blog (blog-reader-experience)](blog-reader-experience)
 
 ---
 
