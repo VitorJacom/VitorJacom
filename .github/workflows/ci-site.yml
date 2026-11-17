@@ -2,6 +2,7 @@ name: Site CI
 
 on:
   push:
+    branches: [main]
     paths:
       - 'site/**'
       - 'tests/**'
@@ -30,7 +31,13 @@ jobs:
         working-directory: .
         run: |
           set -euo pipefail
-          MODIFIED=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^(site/)?tests/core/' || true)
+          CANDIDATES=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^(site/)?tests/core/' || true)
+          MODIFIED=""
+          for file in $CANDIDATES; do
+            if git cat-file -e "origin/main:$file" 2>/dev/null; then
+              MODIFIED="${MODIFIED}${file}"$'\n'
+            fi
+          done
           if [ -n "$MODIFIED" ]; then
             echo "::error::ALERTA DE FRAUDE: Arquivos protegidos em tests/core/ foram modificados:"
             echo "$MODIFIED"

@@ -13,7 +13,7 @@ A tabela abaixo lista as telas e interfaces cadastradas no sistema, seu identifi
 | Slug | Nome da Tela / Interface | Viewport | Status | Origem | Spec |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | `TEMPLATE` | Template Canônico de Living Spec (3 Camadas) | 1280x800 / 390x844 | `Canonical` | Governança Mockup-as-Code (Issue #25) | [TEMPLATE.md](TEMPLATE.md) |
-| `github-profile-readme` | GitHub Profile README Executivo & Identidade Visual | 1280x2800 / 960px | `Approved` | Refinamento Visual / Avatar & Header Fix | [github-profile-readme.md](github-profile-readme.md) |
+| `github-profile-readme` | GitHub Profile README Executivo & Identidade Visual | 1280x2800 / 960px | `Implemented` | Refinamento Visual / Avatar & Header Fix (Issue #23) | [github-profile-readme.md](github-profile-readme.md) |
 
 ---
 

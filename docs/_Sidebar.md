@@ -25,3 +25,4 @@
 
 - [📑 Índice de Telas Implementadas (Implemented-Screens-Catalog)](Implemented-Screens-Catalog)
 - [🌐 Portfólio Web — Fundação (site-foundation)](site-foundation)
+- [👤 GitHub Profile README — Produção (github-profile-readme-live)](github-profile-readme-live)

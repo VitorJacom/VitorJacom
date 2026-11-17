@@ -13,6 +13,7 @@ A tabela abaixo lista as interfaces já construídas em código de produção, s
 | Slug | Nome da Tela / Interface | Stack Tecnológica | Viewport | Status | Origem | Documentação & Prova Visual |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | `site-foundation` | Portfólio Web — Fundação, Hero & Seções Canônicas | React 19, TypeScript 5, Vite, Tailwind CSS | `1440x2500` | `Implemented / Live` | Issues #2 & #3 | [site-foundation.md](site-foundation.md) |
+| `github-profile-readme-live` | GitHub Profile README Executivo & Assets Canônicos | Markdown, HTML Semântico, WebP/PNG/SVG | `1280x2200` | `Implemented / Live` | Issue #23 | [github-profile-readme-live.md](github-profile-readme-live.md) |
 
 ---
 

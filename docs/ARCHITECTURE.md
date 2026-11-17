@@ -16,14 +16,21 @@ VitorJacom/VitorJacom (Repositório Especial)
 ├── PROJECT_CONTEXT.md             # Contexto rápido e restrições AIDD
 ├── docs/
 │   ├── ARCHITECTURE.md            # Fonte única da verdade arquitetural (este documento)
+│   ├── Home.md                    # Portal inicial da GitHub Wiki
+│   ├── _Sidebar.md                # Navegação global da GitHub Wiki
+│   ├── _Footer.md                 # Rodapé institucional Docs-as-Code
+│   ├── assets/mockups/            # Capturas determinísticas dos Mockup Living Specs
+│   ├── mockups/                   # Catálogo de Telas Planejadas (Mockups-Catalog)
+│   ├── screenshots/               # Catálogo de Telas Implementadas (Implemented-Screens-Catalog)
 │   └── adr/
 │       ├── 0001-stack-e-estrutura-da-pagina-pessoal.md
 │       ├── 0002-content-driven-blog-e-mcp-stdio-sem-backend.md
 │       └── 0003-showcase-interativo-ages-demos-client-side.md
 ├── .github/
 │   └── workflows/
-│       ├── ci-site.yml            # CI: Lint, Typecheck e testes Vitest
-│       └── deploy-pages.yml       # Deploy automatizado do /site para GitHub Pages
+│       ├── ci-site.yml            # CI: Golden Rule Guard, testes core/features e cobertura 85%
+│       ├── deploy-pages.yml       # Deploy automatizado do /site para GitHub Pages
+│       └── wiki-sync.yml          # Sincronização contínua Dual-Context para GitHub Wiki
 ├── mcp/                           # Servidor MCP Stdio para Agentes de IA
 │   ├── package.json
 │   ├── tsconfig.json
@@ -45,6 +52,10 @@ VitorJacom/VitorJacom (Repositório Especial)
     │       └── 2026-02-aidd-metodo-sobre-modelo.md
     ├── public/
     │   ├── curriculo-vitor-jacom.pdf  # Cópia estática do currículo para download
+    │   ├── avatar.png                 # Avatar circular canônico (1:1, canal alfa puro)
+    │   ├── avatar.webp                # Avatar circular otimizado em WebP
+    │   ├── banner.webp                # Top banner panorâmico otimizado (<= 5KB)
+    │   ├── banner.jpg                 # Fallback JPG do banner panorâmico
     │   ├── vitor.webp                 # Foto otimizada para Web Vitals (< 150KB)
     │   ├── favicon.svg
     │   ├── llms.txt                   # Documentação semântica para LLMs e crawlers
