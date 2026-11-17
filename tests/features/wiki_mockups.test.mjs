@@ -41,6 +41,18 @@ const SITE_FOUNDATION_PNG_PATH = path.join(
   'screenshots',
   'site-foundation-preview.png'
 );
+const PROFILE_LIVE_MD_PATH = path.join(
+  REPO_ROOT,
+  'docs',
+  'screenshots',
+  'github-profile-readme-live.md'
+);
+const PROFILE_LIVE_PNG_PATH = path.join(
+  REPO_ROOT,
+  'docs',
+  'screenshots',
+  'github-profile-readme-live-preview.png'
+);
 const WIKI_SYNC_WORKFLOW_PATH = path.join(
   REPO_ROOT,
   '.github',
@@ -219,6 +231,39 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
       assert.ok(
         content.includes('site-foundation'),
         'docs/screenshots/README.md must reference site-foundation slug'
+      );
+      assert.ok(
+        content.includes('github-profile-readme-live.md'),
+        'docs/screenshots/README.md must list github-profile-readme-live.md'
+      );
+    });
+
+    it('should provide docs/screenshots/github-profile-readme-live.md documenting the implemented README screen and validate PNG signature of docs/screenshots/github-profile-readme-live-preview.png', () => {
+      assert.ok(
+        fs.existsSync(PROFILE_LIVE_MD_PATH),
+        `Expected docs/screenshots/github-profile-readme-live.md to exist at ${PROFILE_LIVE_MD_PATH}`
+      );
+      const mdContent = fs.readFileSync(PROFILE_LIVE_MD_PATH, 'utf-8');
+      assert.ok(
+        mdContent.includes('../screenshots/github-profile-readme-live-preview.png'),
+        'docs/screenshots/github-profile-readme-live.md must reference ../screenshots/github-profile-readme-live-preview.png'
+      );
+      assert.ok(
+        fs.existsSync(PROFILE_LIVE_PNG_PATH),
+        `Expected production PNG screenshot at ${PROFILE_LIVE_PNG_PATH}`
+      );
+      const pngBuffer = fs.readFileSync(PROFILE_LIVE_PNG_PATH);
+      assert.ok(
+        pngBuffer.length > 1024,
+        'github-profile-readme-live-preview.png must be a non-empty image (> 1KB)'
+      );
+      const expectedSignature = Buffer.from([
+        0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a
+      ]);
+      assert.deepStrictEqual(
+        pngBuffer.subarray(0, 8),
+        expectedSignature,
+        'github-profile-readme-live-preview.png must start with a valid 8-byte PNG signature'
       );
     });
 
@@ -400,7 +445,8 @@ describe('Issue #25 — Wiki Living Specs Catalog & Continuous Gollum Sync Suite
         MOCKUPS_TEMPLATE_PATH,
         PROFILE_MOCKUP_MD_PATH,
         SCREENSHOTS_README_PATH,
-        SITE_FOUNDATION_MD_PATH
+        SITE_FOUNDATION_MD_PATH,
+        PROFILE_LIVE_MD_PATH
       ];
 
       const emptyLinkRegex = /\[[^\]]*\]\(\s*\)/g;

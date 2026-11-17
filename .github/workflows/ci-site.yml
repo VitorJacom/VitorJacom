@@ -2,12 +2,15 @@ name: Site CI
 
 on:
   push:
+    branches: [main]
     paths:
       - 'site/**'
+      - 'tests/**'
       - '.github/workflows/ci-site.yml'
   pull_request:
     paths:
       - 'site/**'
+      - 'tests/**'
       - '.github/workflows/ci-site.yml'
 
 jobs:
@@ -21,6 +24,26 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Golden Rule Anti-Tamper Guard
+        working-directory: .
+        run: |
+          set -euo pipefail
+          CANDIDATES=$(git diff --name-only origin/main...HEAD 2>/dev/null | grep -E '^(site/)?tests/core/' || true)
+          MODIFIED=""
+          for file in $CANDIDATES; do
+            if git cat-file -e "origin/main:$file" 2>/dev/null; then
+              MODIFIED="${MODIFIED}${file}"$'\n'
+            fi
+          done
+          if [ -n "$MODIFIED" ]; then
+            echo "::error::ALERTA DE FRAUDE: Arquivos protegidos em tests/core/ foram modificados:"
+            echo "$MODIFIED"
+            exit 1
+          fi
+          echo "Golden Rule Anti-Tamper Guard: OK"
 
       - name: Setup Node.js 20
         uses: actions/setup-node@v4
@@ -29,11 +52,20 @@ jobs:
           cache: 'npm'
           cache-dependency-path: site/package-lock.json
 
+      - name: Run Core Root Tests
+        working-directory: .
+        run: |
+          node --test tests/core/*.test.mjs
+          node --test tests/features/*.test.mjs
+
       - name: Install Dependencies
         run: npm ci
 
       - name: Run Vitest Suite
         run: npm test
+
+      - name: Run Vitest Coverage (85% Threshold)
+        run: npm run coverage
 
       - name: Build Web Application
         run: npm run build

@@ -16,14 +16,21 @@ VitorJacom/VitorJacom (Repositório Especial)
 ├── PROJECT_CONTEXT.md             # Contexto rápido e restrições AIDD
 ├── docs/
 │   ├── ARCHITECTURE.md            # Fonte única da verdade arquitetural (este documento)
+│   ├── Home.md                    # Portal inicial da GitHub Wiki
+│   ├── _Sidebar.md                # Navegação global da GitHub Wiki
+│   ├── _Footer.md                 # Rodapé institucional Docs-as-Code
+│   ├── assets/mockups/            # Capturas determinísticas dos Mockup Living Specs
+│   ├── mockups/                   # Catálogo de Telas Planejadas (Mockups-Catalog)
+│   ├── screenshots/               # Catálogo de Telas Implementadas (Implemented-Screens-Catalog)
 │   └── adr/
 │       ├── 0001-stack-e-estrutura-da-pagina-pessoal.md
 │       ├── 0002-content-driven-blog-e-mcp-stdio-sem-backend.md
 │       └── 0003-showcase-interativo-ages-demos-client-side.md
 ├── .github/
 │   └── workflows/
-│       ├── ci-site.yml            # CI: Lint, Typecheck e testes Vitest
-│       └── deploy-pages.yml       # Deploy automatizado do /site para GitHub Pages
+│       ├── ci-site.yml            # CI: Golden Rule Guard, testes core/features e cobertura 85%
+│       ├── deploy-pages.yml       # Deploy automatizado do /site para GitHub Pages
+│       └── wiki-sync.yml          # Sincronização contínua Dual-Context para GitHub Wiki
 ├── mcp/                           # Servidor MCP Stdio para Agentes de IA
 │   ├── package.json
 │   ├── tsconfig.json
@@ -45,6 +52,10 @@ VitorJacom/VitorJacom (Repositório Especial)
     │       └── 2026-02-aidd-metodo-sobre-modelo.md
     ├── public/
     │   ├── curriculo-vitor-jacom.pdf  # Cópia estática do currículo para download
+    │   ├── avatar.png                 # Avatar circular canônico (1:1, canal alfa puro)
+    │   ├── avatar.webp                # Avatar circular otimizado em WebP
+    │   ├── banner.webp                # Top banner panorâmico otimizado (<= 5KB)
+    │   ├── banner.jpg                 # Fallback JPG do banner panorâmico
     │   ├── vitor.webp                 # Foto otimizada para Web Vitals (< 150KB)
     │   ├── favicon.svg
     │   ├── llms.txt                   # Documentação semântica para LLMs e crawlers
@@ -221,13 +232,19 @@ export interface SkillItemResponse {
 
 ---
 
-## 4. Estratégia de Qualidade e TDD
+## 4. Estratégia de Qualidade, Topologia Canônica AIDD e TDD
 
+- **Topologia Canônica (`core` vs `features`) e Trava Dupla Anti-Fraude:**
+  - **`tests/core/` e `site/tests/core/` (Zona Intocável / Imutável):** Guardam os contratos fundamentais de negócio, invariantes de perfil e ativos estáticos (`tests/core/profile_validation.test.mjs`) e contratos tipados de dados canônicos (`site/tests/core/canonical_data.test.ts`). É estritamente proibido alterar, comentar ou remover testes em `core/` durante entregas de features.
+  - **`tests/features/` e `site/tests/features/` (Testes de Aceitação):** Concentram os novos testes de aceitação por issue ativa, incluindo renderização da aplicação (`site/tests/features/app.test.tsx`), scaffolding e validações de entrega.
+  - **Circuit-Breaker (Golden Rule via Gatekeeper & CI):** Antes de qualquer commit ou abertura de Pull Request, a esteira valida via `git diff --name-only origin/main...HEAD` se houve alteração em `tests/core/` ou `site/tests/core/`, abortando o pipeline caso ocorra violação.
 - **Diretrizes Mandatórias de Cobertura e Provas:**
   - **Code Coverage >= 85%**: Todas as suítes de testes de frontend e MCP devem manter cobertura mínima de 85% em linhas, branches, funções e statements.
   - **Happy & Edge Cases**: Todo módulo sob teste deve possuir especificação de casos de sucesso (Happy Cases) e casos de exceção/borda/valores nulos (Edge Cases), com logs registrados no relatório de entrega.
   - **Prova Visual de Front-End**: Qualquer entrega envolvendo telas ou componentes React exige a captura de screenshots renderizados, anexados diretamente no PR.
 - **Camadas de Testes:**
+  - `tests/core/` & `site/tests/core/`: Contratos fundamentais e imutáveis de perfil, ativos e datasets canônicos.
+  - `tests/features/` & `site/tests/features/`: Testes de aceitação das issues ativas e componentes integrados (`app.test.tsx`).
   - `site/tests/components/`: Testes de componentes visuais básicos (Hero, Navbar com links, Timeline, SkillsMatrix).
   - `site/tests/demos/`: Testes determinísticos das 4 demos AGES (cálculo de horas no Estudify, flip de carta no Lucky Draw, transição de estado de respiração no MeditAmamente, incremento de aplausos no Globo Aplausos e expansão do painel "Sob o Capô").
   - `site/tests/blog/`: Teste do loader de markdown, renderização de listagem e roteamento por hash (`#blog/:slug`).
